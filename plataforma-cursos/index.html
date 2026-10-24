@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width">
+<title>Plataforma Cursos Inside</title>
+<style>body{font-family:sans-serif;max-width:800px;margin:auto;padding:15px} input{width:100%;padding:12px;border-radius:8px;border:1px solid #ccc} .card{background:#fff;border:1px solid #eee;padding:15px;border-radius:10px;margin:10px 0}</style>
+</head><body>
+<h2>Plataforma de Gestão de Cursos</h2>
+<input id="busca" placeholder="Pesquisar curso: ex: React, Java..." onkeyup="filtrar()">
+<div id="lista"></div>
+<script>
+const cursos=[{nome:"React para Iniciantes",cat:"Frontend"},{nome:"Node.js API REST",cat:"Backend"},{nome:"SQL e NoSQL",cat:"Base de Dados"},{nome:"Lógica de Programação",cat:"Fundamentos"}];
+function mostrar(lista){document.getElementById('lista').innerHTML=lista.map(c=>`<div class=card><b>${c.nome}</b><br><small>${c.cat}</small></div>`).join('')}
+function filtrar(){let t=document.getElementById('busca').value.toLowerCase(); mostrar(cursos.filter(c=>c.nome.toLowerCase().includes(t)))}
+mostrar(cursos);
+</script></body></html>
