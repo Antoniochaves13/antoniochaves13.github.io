@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width">
+<title>API Tarefas - Documentação</title>
+<style>body{font-family:sans-serif;max-width:800px;margin:auto;padding:15px;background:#f5f7fb} pre{background:#0b2a5c;color:#9cc7ff;padding:15px;border-radius:10px;overflow:auto}</style>
+</head><body>
+<h2>API de Gestão de Tarefas - Backend</h2>
+<p>Stack: Node.js + Express + MongoDB (NoSQL) + API REST</p>
+<pre>
+// server.js - 60 linhas - Arquitetura MVC
+const express = require('express');
+const mongoose = require('mongoose');
+const app = express();
+app.use(express.json());
+
+const TarefaSchema = new mongoose.Schema({
+  titulo: String, status: String
+});
+const Tarefa = mongoose.model('Tarefa', TarefaSchema);
+
+app.get('/tarefas', async (req,res)=>{
+  const dados = await Tarefa.find(); // NoSQL
+  res.json(dados);
+});
+app.post('/tarefas', async (req,res)=>{
+  const nova = await Tarefa.create(req.body);
+  res.status(201).json(nova);
+});
+// SQL exemplo: SELECT status, COUNT(*) FROM tarefas GROUP BY status
+app.listen(3000);
+</pre>
+<p><b>Endpoints:</b> GET /tarefas, POST /tarefas, PUT /tarefas/:id, DELETE /tarefas/:id</p>
+<p>Código completo no GitHub.</p>
+</body></html>
